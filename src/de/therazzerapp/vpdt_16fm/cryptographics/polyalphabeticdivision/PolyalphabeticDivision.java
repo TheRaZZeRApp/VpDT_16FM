@@ -36,7 +36,7 @@ public class PolyalphabeticDivision {
         r3 = new RollerFinal(2,2);
     }
 
-    public static String encode(String newDividend, String divisor, int splitValue){
+    public static String encode(String newDividend, String divisor){
 
         update(newDividend, divisor);
 
@@ -46,25 +46,10 @@ public class PolyalphabeticDivision {
             quotient += (convertText(prepareText(sentence)[x],false));
         }
 
-        if (splitValue != 0){
-            String text2 = "";
-            String[] temp2 = splitByNumber(quotient, splitValue);
-            int counter = 0;
-            for(int x=0;x < temp2.length;x++){
-                counter++;
-                text2 += temp2[x];
-                text2 += "  ";
-                if (counter == 8){
-                    text2 += "\n";
-                    counter = 0;
-                }
-            }
-            return text2;
-        }
         return quotient;
     }
 
-    public static String decipher(String newDividend, String divisor,int splitValue){
+    public static String decipher(String newDividend, String divisor){
 
         update(newDividend, divisor);
 
@@ -75,26 +60,11 @@ public class PolyalphabeticDivision {
             dividend = splitByNumber(prepareText(sentence)[x],1);
         }
 
-        if (splitValue != 0){
-            String text2 = "";
-            String[] temp2 = splitByNumber(quotient, splitValue);
-            int counter = 0;
-            for(int x=0;x < temp2.length;x++){
-                counter++;
-                text2 += temp2[x];
-                text2 += "  ";
-                if (counter == 8){
-                    text2 += "\n";
-                    counter = 0;
-                }
-            }
-            return text2;
-        }
         return quotient;
     }
 
     private static String[] prepareText(String dividend){
-        dividend = dividend.replaceAll("[^" +  String.valueOf(CryptographicUtils.rollerLength) +"]", "");
+        //dividend = dividend.replaceAll("[^" +  String.valueOf(CryptographicUtils.rollerLength) +"]", "");
         String[] newText = splitByNumber(dividend,sentence.length());
 
         String temp = "";
