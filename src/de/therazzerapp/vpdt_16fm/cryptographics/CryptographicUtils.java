@@ -12,6 +12,6 @@ public class CryptographicUtils {
      * The global chars which can be used inside a text.
      *
      */
-    public static char[] charSet= {'a','b','c','d'};
+    public static char[] charSet= {'a','b','c','d','x'};
     public static int rollerLength = charSet.length;
 }
