@@ -1,6 +1,6 @@
 package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
 
-import de.therazzerapp.vpdt_16fm.cryptographics.CryptographicUtils;
+import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 
 /**
  * <description>
@@ -15,30 +15,33 @@ public abstract class Roller {
 
     public Roller(int moves, int multipler) {
         this.multipler = multipler;
+        move(moves);
     }
 
     protected int keyToPosition(char key){
-        int i;
-        for(i = 0; key != CryptographicUtils.charSet[i]; i++){}
+        int i = 0;
+        while (key != CUtils.charSet[i]) {
+            i++;
+        }
         return i;
     }
 
     protected int correctMoves(int newPosition){
-        while ((newPosition < 0) || (newPosition > (CryptographicUtils.rollerLength-1))){
-            if(newPosition > (CryptographicUtils.rollerLength-1)){
-                newPosition -= (CryptographicUtils.rollerLength-1);
+        while ((newPosition < 0) || (newPosition > (CUtils.rollerLength-1))){
+            if(newPosition > (CUtils.rollerLength-1)){
+                newPosition -= (CUtils.rollerLength-1);
             } else {
-                newPosition += (CryptographicUtils.rollerLength-1);
+                newPosition += (CUtils.rollerLength-1);
             }
         }
-        return position;
+        return newPosition;
     }
 
     public abstract void move(int keyPosition);
     public abstract void moveToKey(char key);
 
     public char getKey(){
-        return CryptographicUtils.charSet[position];
+        return CUtils.charSet[position];
     }
 
     public int getCurrentPosition() {

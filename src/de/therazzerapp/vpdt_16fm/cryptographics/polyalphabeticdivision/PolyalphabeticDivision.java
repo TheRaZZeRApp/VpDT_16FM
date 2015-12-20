@@ -1,7 +1,8 @@
 package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
 
 
-import de.therazzerapp.vpdt_16fm.cryptographics.CryptographicUtils;
+import de.therazzerapp.vpdt_16fm.cryptographics.CSettings;
+import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 
 /**
  * Main poly div class.
@@ -11,78 +12,71 @@ import de.therazzerapp.vpdt_16fm.cryptographics.CryptographicUtils;
  */
 public class PolyalphabeticDivision {
 
-    private static String dividend[];
-    private static String password;
-    private static String sentence;
-
     private static RollerNormal r1;
     private static RollerNormal r2;
     private static RollerFinal r3;
 
-    private static void update (String newDividend, String divisor){
-        password = prepareText2(divisor);
-        sentence = newDividend;
-
-        if (divisor.length() > newDividend.length()){
-            while (divisor.length() != newDividend.length()){
-                newDividend += "x";
-            }
-        }
-
-        dividend = splitByNumber(divisor,1);
-
-        r1 = new RollerNormal(1,2);
-        r2 = new RollerNormal(2,2);
-        r3 = new RollerFinal(2,2);
+    private static void update (){
+        r1 = new RollerNormal(CSettings.r1Position,CSettings.r1Multiplier);
+        r2 = new RollerNormal(CSettings.r2Position,CSettings.r2Multiplier);
+        r3 = new RollerFinal(CSettings.r3Position,CSettings.r3Multiplier);
     }
 
-    public static String encode(String newDividend, String divisor){
-
-        update(newDividend, divisor);
-
-        String quotient = "";
-
-        for(int x=0;x != prepareText(sentence).length;x++){
-            quotient += (convertText(prepareText(sentence)[x],false));
+    /**
+     * Adds a x to the dividend until both are even.
+     * @param dividend
+     *              The raw text
+     * @param divisor
+     *              The password
+     * @return
+     *      The fixed dividend
+     */
+    private static String fixDividend(String dividend, String divisor){
+        while(dividend.length() < divisor.length()){
+            dividend += "x";
         }
-
-        return quotient;
+        return dividend;
     }
 
-    public static String decipher(String newDividend, String divisor){
+    public static String encode(String dividend, String divisor){
+        String cipher = "";
 
-        update(newDividend, divisor);
+        update();
+        dividend = CUtils.clearPlaintext(dividend);
+        divisor = CUtils.clearPlaintext(divisor);
+        dividend = fixDividend(dividend, divisor);
 
-        String quotient = "";
+        String temp[] = splitByNumber(dividend,divisor.length());
 
-        for(int x=0;x != prepareText(sentence).length;x++){
-            quotient += (convertText(prepareText(sentence)[x],true));
-            dividend = splitByNumber(prepareText(sentence)[x],1);
+        for(int x=0;x != temp.length;x++){
+            cipher += (convertText(temp[x],divisor,false));
         }
 
-        return quotient;
+        return cipher;
     }
 
-    private static String[] prepareText(String dividend){
-        //dividend = dividend.replaceAll("[^" +  String.valueOf(CryptographicUtils.rollerLength) +"]", "");
-        String[] newText = splitByNumber(dividend,sentence.length());
+    public static String decode(String dividend, String divisor){
+        String cipher = "";
 
-        String temp = "";
-        if (newText.length>1){
-            temp = newText[newText.length-1];
-        } else {
-            return newText;
+        update();
+
+        String temp[] = splitByNumber(dividend,divisor.length());
+
+        for(int x=0;x != temp.length;x++){
+            cipher += (convertText(temp[x],divisor,true));
+            //todo Work!
+            //divisor = splitByNumber(temp[x],1);
         }
 
-        while (temp.length() != sentence.length()){
-            temp += "x";
-        }
-
-        newText[newText.length-1] = temp;
-
-        return newText;
+        return cipher;
     }
 
+    /**
+     * Splits a String into an array containing Strings by a given value.
+     * @param text
+     * @param number
+     * @return
+     */
     private static String[] splitByNumber(String text, int number) {
         int inLength = text.length();
         int arLength = inLength / number;
@@ -101,31 +95,31 @@ public class PolyalphabeticDivision {
         return ar;
     }
 
-    private static String prepareText2(String text){
-        text = text.replaceAll("[^a-z0-9_A-Z!\"§$%&/()=.;,?öÖäÄüÜ*-:]", "");
-        return text;
+    private static String convertText(String dividend, String divisor, boolean decode){
+        String convertetText= "";
+        String splittedDivisor[] = splitByNumber(divisor,1);
+        for(int x=0;x != splittedDivisor.length;x++){
+            String[] splittedDividend = splitByNumber(dividend,1);
+            convertetText += getNewKey(splittedDivisor[x].charAt(0),splittedDividend[x].charAt(0));
+        }
+        if (!decode)
+            splittedDivisor = splitByNumber(convertetText,1);
+        return convertetText;
     }
+
     private static char getNewKey(char dividend, char divisor){
         moveWalze1ToKey(dividend);
         moveWalze2ToKey(divisor);
         r1.move(1);
         return r3.getKey();
     }
-    private static String convertText(String text, boolean reConv){
-        String convertetText= "";
-        for(int x=0;x != dividend.length;x++){
-            String[] temp = splitByNumber(text,1);
-            convertetText += getNewKey(dividend[x].charAt(0),temp[x].charAt(0));
-        }
-        if (!reConv)
-            dividend = splitByNumber(convertetText,1);
-        return convertetText;
-    }
+
     private static void moveWalze1ToKey(char key){
         r1.moveToKey(key);
         r2.move(r1.getMoves());
         r3.move(r1.getMoves());
     }
+
     private static void moveWalze2ToKey(char key){
         r2.moveToKey(key);
         r3.moveFinal(r2.getMoves());
