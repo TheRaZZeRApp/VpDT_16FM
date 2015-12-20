@@ -12,9 +12,9 @@ public class VpDT_16FM {
     public static void main(String[] args) {
 
         //test
-        String test = "abcda";
-        String encoded = PolyalphabeticDivision.encode(test, "b");
-        String decoded = PolyalphabeticDivision.decode(encoded, "b");
+        String test = "abcdx";
+        String encoded = PolyalphabeticDivision.encode(test, "a");
+        String decoded = PolyalphabeticDivision.decode(encoded, "a");
         System.out.println("1:\t" + encoded + "\n2:\t" + decoded);
     }
 }

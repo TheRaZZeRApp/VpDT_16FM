@@ -9,11 +9,12 @@ import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
  * @since 0.0.1
  */
 public abstract class Roller {
-    protected int position = 0;
+    protected int position = 1;
     protected int moves;
     protected int multipler;
 
     public Roller(int moves, int multipler) {
+
         this.multipler = multipler;
         move(moves);
     }

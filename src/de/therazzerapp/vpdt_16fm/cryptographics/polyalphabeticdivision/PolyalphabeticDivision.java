@@ -15,11 +15,14 @@ public class PolyalphabeticDivision {
     private static RollerNormal r1;
     private static RollerNormal r2;
     private static RollerFinal r3;
+    private static String splittedDivisor[];
 
-    private static void update (){
+    private static void update (String divisor){
         r1 = new RollerNormal(CSettings.r1Position,CSettings.r1Multiplier);
         r2 = new RollerNormal(CSettings.r2Position,CSettings.r2Multiplier);
         r3 = new RollerFinal(CSettings.r3Position,CSettings.r3Multiplier);
+
+        splittedDivisor = splitByNumber(divisor,1);
     }
 
     /**
@@ -41,7 +44,7 @@ public class PolyalphabeticDivision {
     public static String encode(String dividend, String divisor){
         String cipher = "";
 
-        update();
+        update(divisor);
         dividend = CUtils.clearPlaintext(dividend);
         divisor = CUtils.clearPlaintext(divisor);
         dividend = fixDividend(dividend, divisor);
@@ -49,7 +52,7 @@ public class PolyalphabeticDivision {
         String temp[] = splitByNumber(dividend,divisor.length());
 
         for(int x=0;x != temp.length;x++){
-            cipher += (convertText(temp[x],divisor,false));
+            cipher += (convertText(temp[x],false));
         }
 
         return cipher;
@@ -58,14 +61,13 @@ public class PolyalphabeticDivision {
     public static String decode(String dividend, String divisor){
         String cipher = "";
 
-        update();
+        update(divisor);
 
         String temp[] = splitByNumber(dividend,divisor.length());
 
         for(int x=0;x != temp.length;x++){
-            cipher += (convertText(temp[x],divisor,true));
-            //todo Work!
-            //divisor = splitByNumber(temp[x],1);
+            cipher += (convertText(temp[x],true));
+            splittedDivisor = splitByNumber(temp[x],1);
         }
 
         return cipher;
@@ -95,9 +97,8 @@ public class PolyalphabeticDivision {
         return ar;
     }
 
-    private static String convertText(String dividend, String divisor, boolean decode){
+    private static String convertText(String dividend, boolean decode){
         String convertetText= "";
-        String splittedDivisor[] = splitByNumber(divisor,1);
         for(int x=0;x != splittedDivisor.length;x++){
             String[] splittedDividend = splitByNumber(dividend,1);
             convertetText += getNewKey(splittedDivisor[x].charAt(0),splittedDividend[x].charAt(0));
