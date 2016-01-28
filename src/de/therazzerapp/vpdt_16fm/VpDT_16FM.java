@@ -13,9 +13,12 @@ public class VpDT_16FM {
 
     public static void main(String[] args) {
 
-        String code = PolyalphabeticDivision.compile("Testawdawdaw","Das ist ein Test");
+        String password = "password";
+        String sentence = "Das ist ein Test!";
+
+        String code = PolyalphabeticDivision.compile(password,sentence);
         System.out.println("Test:" + code);
-        System.out.println("Test2: " + PolyalphabeticDivision.decompile("Testawdawdaw",code));
+        System.out.println("Test2: " + PolyalphabeticDivision.decompile(password,code));
         System.out.println("Test3:" + CUtils.generatePassword(50));
 
     }
