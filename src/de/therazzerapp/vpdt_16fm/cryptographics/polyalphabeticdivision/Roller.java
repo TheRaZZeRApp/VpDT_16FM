@@ -9,7 +9,7 @@ import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
  * @since 0.0.1
  */
 public abstract class Roller {
-    protected int position = 1;
+    protected int position;
     protected int moves;
     protected int multipler;
 

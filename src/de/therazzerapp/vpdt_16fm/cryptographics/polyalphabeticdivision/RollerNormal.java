@@ -15,11 +15,12 @@ public class RollerNormal extends Roller {
     public void move(int keyPosition) {
         moves=0;
 
+
         if (keyPosition == 0){
             return;
         }
 
-        for(int x=(keyPosition*multipler);x != 0;x--){
+        for(int x=(keyPosition*multipler);x > 0;x--){
             position++;
             moves++;
         }

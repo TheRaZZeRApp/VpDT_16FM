@@ -9,12 +9,14 @@ import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.Polyalpha
  * @since 0.0.1
  */
 public class VpDT_16FM {
+
     public static void main(String[] args) {
 
-        //test
-        String test = "abcdx";
-        String encoded = PolyalphabeticDivision.encode(test, "a");
-        String decoded = PolyalphabeticDivision.decode(encoded, "a");
-        System.out.println("1:\t" + encoded + "\n2:\t" + decoded);
+        String code = PolyalphabeticDivision.compile("Test","Das ist ein Test");
+        System.out.println("Test:" + code);
+        System.out.println("Test2: " + PolyalphabeticDivision.decompile("Test",code));
+        System.out.println();
+
     }
+
 }
