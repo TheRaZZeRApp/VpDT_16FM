@@ -7,10 +7,10 @@ package de.therazzerapp.vpdt_16fm.cryptographics;
  * @since <version>
  */
 public class CSettings {
-    public static int r1Position = 3;
-    public static int r2Position = 3;
+    public static int r1Position = 1;
+    public static int r2Position = 2;
     public static int r3Position = 3;
-    public static int r1Multiplier = 3;
+    public static int r1Multiplier = 5;
     public static int r2Multiplier = 3;
     public static int r3Multiplier = 2;
 }

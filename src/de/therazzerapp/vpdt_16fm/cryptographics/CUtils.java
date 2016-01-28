@@ -1,5 +1,7 @@
 package de.therazzerapp.vpdt_16fm.cryptographics;
 
+import java.util.Random;
+
 /**
  * <description>
  *
@@ -51,5 +53,33 @@ public class CUtils {
             }
         }
         return ar;
+    }
+
+    /**
+     * Generates a password containing all characters from the global char set.
+     *
+     * @param length
+     *          The password length
+     * @return
+     *      A random generated password
+     */
+    public static String generatePassword(int length){
+        Random random = new Random();
+        String temp = "";
+        for(int x=0;x != length;x++){
+            temp += charSet[random.nextInt(charSet.length-1)];
+        }
+        return temp;
+    }
+
+    /**
+     *
+     * @param text
+     * @param regex
+     * @param replacement
+     * @return
+     */
+    public static String replaceLast(String text, String regex, String replacement) {
+        return text.replaceFirst("(?s)"+regex+"(?!.*?"+regex+")", replacement);
     }
 }

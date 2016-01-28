@@ -1,5 +1,6 @@
 package de.therazzerapp.vpdt_16fm;
 
+import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PolyalphabeticDivision;
 
 /**
@@ -12,10 +13,10 @@ public class VpDT_16FM {
 
     public static void main(String[] args) {
 
-        String code = PolyalphabeticDivision.compile("Test","Das ist ein Test");
+        String code = PolyalphabeticDivision.compile("Testawdawdaw","Das ist ein Test");
         System.out.println("Test:" + code);
-        System.out.println("Test2: " + PolyalphabeticDivision.decompile("Test",code));
-        System.out.println();
+        System.out.println("Test2: " + PolyalphabeticDivision.decompile("Testawdawdaw",code));
+        System.out.println("Test3:" + CUtils.generatePassword(50));
 
     }
 
