@@ -1,6 +1,5 @@
 package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
 
-
 import de.therazzerapp.vpdt_16fm.cryptographics.CSettings;
 import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 
@@ -16,9 +15,11 @@ public class PolyalphabeticDivision {
     private static RollerNormal r2;
     private static RollerFinal r3;
 
+    /**
+     * The dividend that has to be shift through every compile.
+     * Previous line is the password for the next line.
+     */
     private static String[] splittetDividend;
-    private static String password;
-    private static String sentence;
 
     /**
      * Encrypts the specified text with a password
@@ -30,23 +31,22 @@ public class PolyalphabeticDivision {
      * @return
      *      The encrypted text
      */
-    public static String compile(String divisor, String dividend) {
+    public static String compile(String dividend, String divisor) {
 
         r1 = new RollerNormal(CSettings.r1Position, CSettings.r1Multiplier);
         r2 = new RollerNormal(CSettings.r2Position, CSettings.r2Multiplier);
         r3 = new RollerFinal(CSettings.r3Position, CSettings.r3Multiplier);
 
-        password = CUtils.clearPlaintext(divisor);
-        sentence = dividend;
+        String password = CUtils.clearPlaintext(divisor);
 
         splittetDividend = CUtils.splitByNumber(divisor,1);
 
-        String text = "";
+        StringBuilder ciphertext = new StringBuilder();
 
-        for(int x = 0; x != prepareDividend(sentence).length; x++){
-            text += (convertText(prepareDividend(sentence)[x],false));
+        for(int x = 0; x != prepareDividend(dividend,password).length; x++){
+            ciphertext.append(convertText(prepareDividend(dividend,password)[x],false));
         }
-        return text;
+        return ciphertext.toString();
     }
 
     /**
@@ -59,24 +59,22 @@ public class PolyalphabeticDivision {
      * @return
      *      The decrypted text
      */
-    public static String decompile(String divisor, String dividend) {
+    public static String decompile(String dividend, String divisor) {
 
         r1 = new RollerNormal(CSettings.r1Position, CSettings.r1Multiplier);
         r2 = new RollerNormal(CSettings.r2Position, CSettings.r2Multiplier);
         r3 = new RollerFinal(CSettings.r3Position, CSettings.r3Multiplier);
 
-        password = CUtils.clearPlaintext(divisor);
-        sentence = dividend;
+        String password = CUtils.clearPlaintext(divisor);
 
         splittetDividend = CUtils.splitByNumber(divisor,1);
 
-        String text = "";
-
-        for(int x = 0; x != prepareDividend(sentence).length; x++){
-            text += (convertText(prepareDividend(sentence)[x],true));
-            splittetDividend = CUtils.splitByNumber(prepareDividend(sentence)[x],1);
+        StringBuilder plaintext = new StringBuilder();
+        for(int x = 0; x != prepareDividend(dividend,password).length; x++){
+            plaintext.append(convertText(prepareDividend(dividend,password)[x],true));
+            splittetDividend = CUtils.splitByNumber(prepareDividend(dividend,password)[x],1);
         }
-        return text;
+        return plaintext.toString();
     }
 
     /**
@@ -87,57 +85,67 @@ public class PolyalphabeticDivision {
      * @return
      *      The fixed dividend
      */
-    private static String[] prepareDividend(String rawDividend){
+    private static String[] prepareDividend(String rawDividend, String password){
 
         String[] splittedDividend = CUtils.splitByNumber(CUtils.clearPlaintext(rawDividend), password.length());
 
-        if (splittedDividend.length <= 1)
+        if (splittedDividend.length < 1)
             return splittedDividend;
 
-        String temp = splittedDividend[splittedDividend.length-1];
+        StringBuilder fixedDividend = new StringBuilder(splittedDividend[splittedDividend.length-1]);
 
-        while (temp.length() < password.length()){
-            temp += "x";
+        while (fixedDividend.length() < password.length()){
+            fixedDividend.append(CUtils.enhancementsSymbol);
         }
 
-        splittedDividend[splittedDividend.length-1] = temp;
+        splittedDividend[splittedDividend.length-1] = fixedDividend.toString();
 
         return splittedDividend;
     }
 
     /**
+     * Converts the raw text line by line
      *
      * @param text
-     * @param reConv
+     *          The raw text
+     * @param decompile
+     *          - false if its a compile
+     *          - true if its a decompile
      * @return
+     *      The compiled text
      */
-    private static String convertText(String text, boolean reConv){
-        String convertetText= "";
-        for(int x = 0; x != splittetDividend.length; x++){
+    private static String convertText(String text, boolean decompile){
+        StringBuilder cipher = new StringBuilder();
+        for(int x = 0; x < splittetDividend.length; x++){
             String[] temp = CUtils.splitByNumber(text,1);
-            convertetText += getNewKey(splittetDividend[x].charAt(0),temp[x].charAt(0));
+            cipher.append(getNewKey(splittetDividend[x].charAt(0),temp[x].charAt(0)));
         }
-        if (!reConv)
-            splittetDividend = CUtils.splitByNumber(convertetText,1);
-        return convertetText;
+        if (!decompile)
+            splittetDividend = CUtils.splitByNumber(cipher.toString(),1);
+        return cipher.toString();
     }
 
     /**
+     * Divides a char by another one.
      *
      * @param dividend
+     *          Raw text char
      * @param divisor
+     *          Password char
      * @return
+     *      Compiled char
      */
     private static char getNewKey(char dividend, char divisor){
         moveWalze1ToKey(dividend);
         moveWalze2ToKey(divisor);
-        r1.move(1);
-        return r3.getKey();
+        r1.move(1); //Damit aa nicht zu bb wird
+        return r3.getCurrentKey();
     }
 
     /**
      * Moves Roller 1 to the given char
      * @param key
+     *          The char the roller gets move to
      */
     private static void moveWalze1ToKey(char key){
         r1.moveToKey(key);
@@ -148,6 +156,7 @@ public class PolyalphabeticDivision {
     /**
      * Moves Roller 2 to the given char
      * @param key
+     *          The char the roller gets move to
      */
     private static void moveWalze2ToKey(char key){
         r2.moveToKey(key);

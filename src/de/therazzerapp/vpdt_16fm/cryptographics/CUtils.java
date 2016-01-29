@@ -3,7 +3,7 @@ package de.therazzerapp.vpdt_16fm.cryptographics;
 import java.util.Random;
 
 /**
- * <description>
+ * Class includes various useful methods and global objects.
  *
  * @author The RaZZeR App <rezzer101@googlemail.com; e-mail@therazzerapp.de>
  * @since 0.0.1
@@ -15,7 +15,11 @@ public class CUtils {
      *
      */
     public static char[] charSet= {'~','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0','_','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','!','\'','§','$','%','&','/','(',')','=','?',',',';','.','ö','Ö','ü','Ü','ä','Ä','*','-',':',' ','>'};
-    public static int rollerLength = charSet.length;
+
+    /**
+     * Gets added to the dividend's last line until its the same size as the password.
+     */
+    public static char enhancementsSymbol = 'x';
 
     /**
      * Removes every character not contained in the global char set.
@@ -35,7 +39,7 @@ public class CUtils {
      * @param number
      *          The distances by which the string is cut
      * @return
-     *      An array =)
+     *      An array where each String has the given length
      */
     public static String[] splitByNumber(String text, int number) {
         int inLength = text.length();
@@ -73,11 +77,16 @@ public class CUtils {
     }
 
     /**
+     * Replaces the last expression in a string by another.
      *
      * @param text
+     *          The raw text
      * @param regex
+     *          The expression to be replaced
      * @param replacement
+     *          The replacement
      * @return
+     *      The edited text
      */
     public static String replaceLast(String text, String regex, String replacement) {
         return text.replaceFirst("(?s)"+regex+"(?!.*?"+regex+")", replacement);

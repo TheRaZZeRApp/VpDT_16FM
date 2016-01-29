@@ -4,7 +4,7 @@ package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
  * <description>
  *
  * @author The RaZZeR App <rezzer101@googlemail.com; e-mail@therazzerapp.de>
- * @since <version>
+ * @since 0.0.1
  */
 public class RollerNormal extends Roller {
     public RollerNormal(int moves, int multipler) {
@@ -14,7 +14,6 @@ public class RollerNormal extends Roller {
     @Override
     public void move(int keyPosition) {
         moves=0;
-
 
         if (keyPosition == 0){
             return;

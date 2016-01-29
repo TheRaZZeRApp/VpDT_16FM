@@ -1,10 +1,10 @@
 package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
 
 /**
- * <description>
+ * The final roller moves backwards
  *
  * @author The RaZZeR App <rezzer101@googlemail.com; e-mail@therazzerapp.de>
- * @since <version>
+ * @since 0.0.1
  */
 public class RollerFinal extends Roller {
     public RollerFinal(int moves, int multipler) {
@@ -31,6 +31,11 @@ public class RollerFinal extends Roller {
         //empty
     }
 
+    /**
+     * The final move this roller makes goes backwards
+     * @param keyPosition
+     *          The amount of moves
+     */
     public void moveFinal(int keyPosition){
         moves=0;
 
