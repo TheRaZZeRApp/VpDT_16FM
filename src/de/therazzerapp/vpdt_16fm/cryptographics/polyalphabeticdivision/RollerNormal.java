@@ -7,8 +7,8 @@ package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
  * @since 0.0.1
  */
 public class RollerNormal extends Roller {
-    public RollerNormal(int moves, int multipler) {
-        super(moves, multipler);
+    public RollerNormal(int moves, int multiplicand) {
+        super(moves, multiplicand);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class RollerNormal extends Roller {
             return;
         }
 
-        for(int x=(keyPosition*multipler);x > 0;x--){
+        for(int x=(keyPosition*multiplicand);x > 0;x--){
             position++;
             moves++;
         }

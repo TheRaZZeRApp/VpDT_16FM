@@ -33,9 +33,10 @@ public class PolyalphabeticDivision {
      */
     public static String compile(String dividend, String divisor) {
 
-        r1 = new RollerNormal(CSettings.r1Position, CSettings.r1Multiplier);
-        r2 = new RollerNormal(CSettings.r2Position, CSettings.r2Multiplier);
-        r3 = new RollerFinal(CSettings.r3Position, CSettings.r3Multiplier);
+        //Will be replaced to add a non static amount of rollers
+        r1 = new RollerNormal(CSettings.r1Position, CSettings.r1Multiplicand);
+        r2 = new RollerNormal(CSettings.r2Position, CSettings.r2Multiplicand);
+        r3 = new RollerFinal(CSettings.r3Position, CSettings.r3Multiplicand);
 
         String password = CUtils.clearPlaintext(divisor);
 
@@ -61,9 +62,10 @@ public class PolyalphabeticDivision {
      */
     public static String decompile(String dividend, String divisor) {
 
-        r1 = new RollerNormal(CSettings.r1Position, CSettings.r1Multiplier);
-        r2 = new RollerNormal(CSettings.r2Position, CSettings.r2Multiplier);
-        r3 = new RollerFinal(CSettings.r3Position, CSettings.r3Multiplier);
+        //Will be replaced to add a non static amount of rollers
+        r1 = new RollerNormal(CSettings.r1Position, CSettings.r1Multiplicand);
+        r2 = new RollerNormal(CSettings.r2Position, CSettings.r2Multiplicand);
+        r3 = new RollerFinal(CSettings.r3Position, CSettings.r3Multiplicand);
 
         String password = CUtils.clearPlaintext(divisor);
 

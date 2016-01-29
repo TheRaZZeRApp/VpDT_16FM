@@ -11,10 +11,10 @@ import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 public abstract class Roller {
     protected int position;
     protected int moves;
-    protected int multipler;
+    protected int multiplicand;
 
-    public Roller(int moves, int multipler) {
-        this.multipler = multipler;
+    public Roller(int moves, int multiplicand) {
+        this.multiplicand = multiplicand;
         move(moves);
     }
 
@@ -101,7 +101,7 @@ public abstract class Roller {
      * @return
      *      The amount of added moves
      */
-    public int getMultipler() {
-        return multipler;
+    public int getMultiplicand() {
+        return multiplicand;
     }
 }

@@ -7,8 +7,8 @@ package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
  * @since 0.0.1
  */
 public class RollerFinal extends Roller {
-    public RollerFinal(int moves, int multipler) {
-        super(moves, multipler);
+    public RollerFinal(int moves, int multiplicand) {
+        super(moves, multiplicand);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class RollerFinal extends Roller {
             return;
         }
 
-        for(int x=(keyPosition*multipler*multipler);x != 0;x--){
+        for(int x=(keyPosition*multiplicand*multiplicand);x != 0;x--){
             position--;
             moves++;
         }
@@ -32,7 +32,7 @@ public class RollerFinal extends Roller {
     }
 
     /**
-     * The final move this roller makes goes backwards
+     * The final move from this roller goes backwards
      * @param keyPosition
      *          The amount of moves
      */
