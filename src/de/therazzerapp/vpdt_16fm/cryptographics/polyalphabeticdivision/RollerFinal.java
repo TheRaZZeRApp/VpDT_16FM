@@ -19,11 +19,8 @@ public class RollerFinal extends Roller {
             return;
         }
 
-        for(int x=(keyPosition*multiplicand*multiplicand);x != 0;x--){
-            position--;
-            moves++;
-        }
-        position = correctMoves(position);
+        moves += keyPosition*multiplicand*multiplicand;
+        position = correctMoves(position -= keyPosition*multiplicand*multiplicand);
     }
 
     @Override
@@ -43,10 +40,7 @@ public class RollerFinal extends Roller {
             return;
         }
 
-        for(int x=(keyPosition);x != 0;x--){
-            position--;
-            moves++;
-        }
-        position = correctMoves(position);
+        moves += keyPosition;
+        position = correctMoves(position -= keyPosition);
     }
 }

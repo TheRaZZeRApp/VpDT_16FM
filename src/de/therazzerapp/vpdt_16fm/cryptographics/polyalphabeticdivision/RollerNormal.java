@@ -19,11 +19,8 @@ public class RollerNormal extends Roller {
             return;
         }
 
-        for(int x=(keyPosition*multiplicand);x > 0;x--){
-            position++;
-            moves++;
-        }
-        position = correctMoves(position);
+        moves += keyPosition*multiplicand;
+        position = correctMoves(position += keyPosition*multiplicand);
     }
 
     @Override

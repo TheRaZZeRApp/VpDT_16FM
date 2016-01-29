@@ -45,11 +45,12 @@ public abstract class Roller {
      *      A cutted amount of moves
      */
     protected int correctMoves(int newPosition){
-        while ((newPosition < 0) || (newPosition > (CUtils.charSet.length-1))){
-            if(newPosition > (CUtils.charSet.length-1)){
-                newPosition -= (CUtils.charSet.length-1);
+        int charSetLength = CUtils.charSet.length-1;
+        while ((newPosition < 0) || (newPosition > (charSetLength))){
+            if(newPosition > (charSetLength)){
+                newPosition -= (charSetLength);
             } else {
-                newPosition += (CUtils.charSet.length-1);
+                newPosition += (charSetLength);
             }
         }
         return newPosition;

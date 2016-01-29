@@ -19,7 +19,7 @@ public class CUtils {
 
     /**
      * Gets added to the dividend's last line until its the same size as the password.
-     * todo Will be replaced by something better and config file
+     * todo Will be replaced by something better and a config file
      */
     public static char enhancementsSymbol = 'x';
 
