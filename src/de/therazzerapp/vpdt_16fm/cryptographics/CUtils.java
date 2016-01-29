@@ -69,11 +69,15 @@ public class CUtils {
      */
     public static String generatePassword(int length){
         Random random = new Random();
-        String temp = "";
+        StringBuilder password = new StringBuilder();
         for(int x=0;x != length;x++){
-            temp += charSet[random.nextInt(charSet.length-1)];
+            char temp = charSet[random.nextInt(charSet.length-1)];
+            while (temp == ' '){
+                temp = charSet[random.nextInt(charSet.length-1)];
+            }
+            password.append(temp);
         }
-        return temp;
+        return password.toString();
     }
 
     /**
