@@ -46,7 +46,7 @@ public abstract class Roller {
      */
     protected int correctMoves(int newPosition){
         int charSetLength = CUtils.charSet.length-1;
-        while ((newPosition < 0) || (newPosition > (charSetLength))){
+        while ((newPosition < 1) || (newPosition > (charSetLength))){
             if(newPosition > (charSetLength)){
                 newPosition -= (charSetLength);
             } else {

@@ -7,4 +7,5 @@ package de.therazzerapp.vpdt_16fm.cryptographics.transposition;
  * @since 0.0.2
  */
 public class Transposition {
+
 }
