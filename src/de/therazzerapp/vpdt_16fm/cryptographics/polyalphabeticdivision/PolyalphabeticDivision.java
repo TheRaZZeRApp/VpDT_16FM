@@ -1,6 +1,6 @@
 package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
 
-import de.therazzerapp.vpdt_16fm.cryptographics.CSettings;
+import de.therazzerapp.vpdt_16fm.cryptographics.PDSettings;
 import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 
 /**
@@ -31,12 +31,12 @@ public class PolyalphabeticDivision {
      * @return
      *      The encrypted text
      */
-    public static String compile(String dividend, String divisor) {
+    public static String compile(PDSettings pdSettings, String dividend, String divisor) {
 
         //Will be replaced to add a non static amount of rollers
-        r1 = new RollerNormal(CSettings.r1Position, CSettings.r1Multiplicand);
-        r2 = new RollerNormal(CSettings.r2Position, CSettings.r2Multiplicand);
-        r3 = new RollerFinal(CSettings.r3Position, CSettings.r3Multiplicand);
+        r1 = new RollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
+        r2 = new RollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
+        r3 = new RollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
 
         String password = CUtils.clearPlaintext(divisor);
 
@@ -60,12 +60,12 @@ public class PolyalphabeticDivision {
      * @return
      *      The decrypted text
      */
-    public static String decompile(String dividend, String divisor) {
+    public static String decompile(PDSettings pdSettings, String dividend, String divisor) {
 
         //Will be replaced to add a non static amount of rollers
-        r1 = new RollerNormal(CSettings.r1Position, CSettings.r1Multiplicand);
-        r2 = new RollerNormal(CSettings.r2Position, CSettings.r2Multiplicand);
-        r3 = new RollerFinal(CSettings.r3Position, CSettings.r3Multiplicand);
+        r1 = new RollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
+        r2 = new RollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
+        r3 = new RollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
 
         String password = CUtils.clearPlaintext(divisor);
 

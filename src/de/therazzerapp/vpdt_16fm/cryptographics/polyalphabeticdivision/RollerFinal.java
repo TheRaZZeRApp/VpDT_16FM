@@ -23,6 +23,10 @@ public class RollerFinal extends Roller {
         position = correctMoves(position -= keyPosition*multiplicand*multiplicand);
     }
 
+    /**
+     * This method is empty, use moveFinal instead.
+     * @param key
+     */
     @Override
     public void moveToKey(char key) {
         //empty
