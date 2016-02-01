@@ -1,8 +1,8 @@
 package de.therazzerapp.vpdt_16fm;
 
-import de.therazzerapp.vpdt_16fm.cryptographics.PDSettings;
+import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PDSettings;
 import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
-import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PolyalphabeticDivision;
+import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PDConverter;
 
 /**
  * Main class
@@ -18,10 +18,10 @@ public class VpDT_16FM {
         String sentence = "Das ist ein kleiner Test";
         String password = CUtils.generatePassword(3);
 
-        String code = PolyalphabeticDivision.compile(pdSettings,sentence,password);
+        String code = PDConverter.compile(pdSettings,sentence,password);
         System.out.println("Plaintext: " + sentence);
         System.out.println("Ciphertext: " + code);
-        System.out.println("Decipherd text: " +PolyalphabeticDivision.decompile(pdSettings,code,password));
+        System.out.println("Decipherd text: " + PDConverter.decompile(pdSettings,code,password));
         System.out.println("Password: " + password);
 
         //VpDT_Gui.createFrame();

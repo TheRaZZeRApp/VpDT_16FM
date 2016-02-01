@@ -6,8 +6,8 @@ package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
  * @author The RaZZeR App <rezzer101@googlemail.com; e-mail@therazzerapp.de>
  * @since 0.0.1
  */
-public class RollerNormal extends Roller {
-    public RollerNormal(int moves, int multiplicand) {
+public class PDRollerNormal extends PDRoller {
+    public PDRollerNormal(int moves, int multiplicand) {
         super(moves, multiplicand);
     }
 

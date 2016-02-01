@@ -8,12 +8,12 @@ import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
  * @author The RaZZeR App <rezzer101@googlemail.com; e-mail@therazzerapp.de>
  * @since 0.0.1
  */
-public abstract class Roller {
+public abstract class PDRoller {
     protected int position;
     protected int moves;
     protected int multiplicand;
 
-    public Roller(int moves, int multiplicand) {
+    public PDRoller(int moves, int multiplicand) {
         this.multiplicand = multiplicand;
         move(moves);
     }

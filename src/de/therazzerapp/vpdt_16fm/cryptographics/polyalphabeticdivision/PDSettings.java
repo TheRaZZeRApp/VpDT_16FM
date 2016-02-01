@@ -1,4 +1,4 @@
-package de.therazzerapp.vpdt_16fm.cryptographics;
+package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
 
 /**
  * Contains the starting position of every roller and there multiplicand.

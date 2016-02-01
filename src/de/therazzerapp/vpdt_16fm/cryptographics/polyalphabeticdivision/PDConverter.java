@@ -1,6 +1,5 @@
 package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
 
-import de.therazzerapp.vpdt_16fm.cryptographics.PDSettings;
 import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 
 /**
@@ -9,11 +8,11 @@ import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
  * @author The RaZZeR App <rezzer101@googlemail.com; e-mail@therazzerapp.de>
  * @since 0.0.1
  */
-public class PolyalphabeticDivision {
+public class PDConverter {
 
-    private static RollerNormal r1;
-    private static RollerNormal r2;
-    private static RollerFinal r3;
+    private static PDRollerNormal r1;
+    private static PDRollerNormal r2;
+    private static PDRollerFinal r3;
 
     /**
      * The dividend that has to be shift through every compile.
@@ -34,9 +33,9 @@ public class PolyalphabeticDivision {
     public static String compile(PDSettings pdSettings, String dividend, String divisor) {
 
         //Will be replaced to add a non static amount of rollers
-        r1 = new RollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
-        r2 = new RollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
-        r3 = new RollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
+        r1 = new PDRollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
+        r2 = new PDRollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
+        r3 = new PDRollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
 
         String password = CUtils.clearPlaintext(divisor);
 
@@ -63,9 +62,9 @@ public class PolyalphabeticDivision {
     public static String decompile(PDSettings pdSettings, String dividend, String divisor) {
 
         //Will be replaced to add a non static amount of rollers
-        r1 = new RollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
-        r2 = new RollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
-        r3 = new RollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
+        r1 = new PDRollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
+        r2 = new PDRollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
+        r3 = new PDRollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
 
         String password = CUtils.clearPlaintext(divisor);
 
