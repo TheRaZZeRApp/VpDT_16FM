@@ -7,12 +7,14 @@ package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
  * @since 0.0.2
  */
 public class PDSettings {
+
     private int r1Position;
     private int r2Position;
     private int r3Position;
     private int r1Multiplicand;
     private int r2Multiplicand;
     private int r3Multiplicand;
+    private Character customEnhancementsSymbol;
 
     /**
      * Sets the starting position of every roller and there multiplicand.
@@ -37,6 +39,34 @@ public class PDSettings {
         this.r1Multiplicand = r1Multiplicand;
         this.r2Multiplicand = r2Multiplicand;
         this.r3Multiplicand = r3Multiplicand;
+    }
+
+    /**
+     * Sets the starting position of every roller and there multiplicand.
+     *
+     * @param r1Position
+     *          Roller 1 starting position
+     * @param r2Position
+     *          Roller 2 starting position
+     * @param r3Position
+     *          Roller 3 starting position
+     * @param r1Multiplicand
+     *          Roller 1 multiplicand
+     * @param r2Multiplicand
+     *          Roller 2 multiplicand
+     * @param r3Multiplicand
+     *          Roller 3 multiplicand
+     * @param customEnhancementsSymbol
+     *          A custom custom enhancements character instead of a random one
+     */
+    public PDSettings(int r1Position, int r2Position, int r3Position, int r1Multiplicand, int r2Multiplicand, int r3Multiplicand, Character customEnhancementsSymbol) {
+        this.r1Position = r1Position;
+        this.r2Position = r2Position;
+        this.r3Position = r3Position;
+        this.r1Multiplicand = r1Multiplicand;
+        this.r2Multiplicand = r2Multiplicand;
+        this.r3Multiplicand = r3Multiplicand;
+        this.customEnhancementsSymbol = customEnhancementsSymbol;
     }
 
     /**
@@ -103,5 +133,15 @@ public class PDSettings {
      */
     public int getR3Multiplicand() {
         return r3Multiplicand;
+    }
+
+    /**
+     * Returns the enhancements symbol if set.
+     * @return
+     *      null if not set<br>
+     *      the enhancements symbol as a character
+     */
+    public Character getCustomEnhancementsSymbol() {
+        return customEnhancementsSymbol;
     }
 }

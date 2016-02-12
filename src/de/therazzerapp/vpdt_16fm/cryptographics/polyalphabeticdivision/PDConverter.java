@@ -5,7 +5,7 @@ import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 import java.util.Random;
 
 /**
- * Main poly division class.
+ * Main polyalphabetic division class.
  *
  * @author The RaZZeR App <rezzer101@googlemail.com; e-mail@therazzerapp.de>
  * @since 0.0.1
@@ -34,7 +34,6 @@ public class PDConverter {
      */
     public static String compile(PDSettings pdSettings, String dividend, String divisor) {
 
-        //Will be replaced to add a non static amount of rollers
         r1 = new PDRollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
         r2 = new PDRollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
         r3 = new PDRollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
@@ -42,8 +41,13 @@ public class PDConverter {
         Random expanderAmount = new Random(10);
         int expander = expanderAmount.nextInt();
 
+        char encS = CUtils.enhancementsSymbol;
+        if(pdSettings.getCustomEnhancementsSymbol() != null){
+            encS = pdSettings.getCustomEnhancementsSymbol();
+        }
+
         for (int i = 0;i < expander; i++){
-            dividend += CUtils.enhancementsSymbol;
+            dividend += encS;
         }
 
         String password = CUtils.clearPlaintext(divisor);
@@ -52,8 +56,8 @@ public class PDConverter {
 
         StringBuilder ciphertext = new StringBuilder();
 
-        for(int x = 0; x != prepareDividend(dividend,password).length; x++){
-            ciphertext.append(convertText(prepareDividend(dividend,password)[x],false));
+        for(int x = 0; x != prepareDividend(pdSettings, dividend, password).length; x++){
+            ciphertext.append(convertText(prepareDividend(pdSettings, dividend, password)[x],false));
         }
         return ciphertext.toString();
     }
@@ -70,7 +74,6 @@ public class PDConverter {
      */
     public static String decompile(PDSettings pdSettings, String dividend, String divisor) {
 
-        //Will be replaced to add a non static amount of rollers
         r1 = new PDRollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
         r2 = new PDRollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
         r3 = new PDRollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
@@ -80,9 +83,9 @@ public class PDConverter {
         splittetDividend = CUtils.splitByNumber(divisor,1);
 
         StringBuilder plaintext = new StringBuilder();
-        for(int x = 0; x != prepareDividend(dividend,password).length; x++){
-            plaintext.append(convertText(prepareDividend(dividend,password)[x],true));
-            splittetDividend = CUtils.splitByNumber(prepareDividend(dividend,password)[x],1);
+        for(int x = 0; x != prepareDividend(pdSettings, dividend, password).length; x++){
+            plaintext.append(convertText(prepareDividend(pdSettings, dividend, password)[x],true));
+            splittetDividend = CUtils.splitByNumber(prepareDividend(pdSettings, dividend, password)[x],1);
         }
         return plaintext.toString();
     }
@@ -95,7 +98,7 @@ public class PDConverter {
      * @return
      *      The fixed dividend
      */
-    private static String[] prepareDividend(String rawDividend, String password){
+    private static String[] prepareDividend(PDSettings pdSettings, String rawDividend, String password){
 
         String[] splittedDividend = CUtils.splitByNumber(CUtils.clearPlaintext(rawDividend), password.length());
 
@@ -104,8 +107,13 @@ public class PDConverter {
 
         StringBuilder fixedDividend = new StringBuilder(splittedDividend[splittedDividend.length-1]);
 
+        char encS = CUtils.enhancementsSymbol;
+        if(pdSettings.getCustomEnhancementsSymbol() != null){
+            encS = pdSettings.getCustomEnhancementsSymbol();
+        }
+
         while (fixedDividend.length() < password.length()){
-            fixedDividend.append(CUtils.enhancementsSymbol);
+            fixedDividend.append(encS);
         }
 
         splittedDividend[splittedDividend.length-1] = fixedDividend.toString();
@@ -148,7 +156,7 @@ public class PDConverter {
     private static char getNewKey(char dividend, char divisor){
         moveWalze1ToKey(dividend);
         moveWalze2ToKey(divisor);
-        r1.move(1); //Damit aa nicht zu bb wird
+        r1.move(1);
         return r3.getCurrentKey();
     }
 

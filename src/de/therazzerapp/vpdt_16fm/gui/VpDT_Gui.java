@@ -2,9 +2,12 @@ package de.therazzerapp.vpdt_16fm.gui;
 
 import de.therazzerapp.vpdt_16fm.CopyToClipboard;
 import de.therazzerapp.vpdt_16fm.FileReader;
+import de.therazzerapp.vpdt_16fm.VpDT_16FM;
 import de.therazzerapp.vpdt_16fm.filefilter.TXTFileFilter;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -26,16 +29,24 @@ public class VpDT_Gui {
     private JButton runButton;
     private JButton encodeButton;
     private JButton decodeButton;
+    private JScrollPane inputScrollPane;
     private JPopupMenu popup = new JPopupMenu("Popup");
     private JMenuItem ctcb = new JMenuItem("Copy To Clipboard");
     private JMenuItem clear = new JMenuItem("Clear");
     private JFileChooser openDialog = new JFileChooser();
+
+    public JTextArea getConsoleOutputArea() {
+        return consoleOutputArea;
+    }
 
     /**
      *
      * @param frame
      */
     public VpDT_Gui(JFrame frame) {
+
+        inputArea.setLineWrap(true);
+        inputArea.setWrapStyleWord(true);
 
         addMenu(frame);
 
@@ -114,6 +125,7 @@ public class VpDT_Gui {
         open.addActionListener(e -> {
             openDialog.showOpenDialog(frame);
             inputArea.setText(FileReader.getFileContent(openDialog.getSelectedFile()));
+            consoleOutputArea.append("\n[Info] The following file was read: " + "\"" + openDialog.getSelectedFile().getAbsolutePath() +"\" (" + inputArea.getText().length() + " character)");
         });
 
         exit.addActionListener(e -> System.exit(0));
@@ -125,6 +137,13 @@ public class VpDT_Gui {
         JMenuItem about = new JMenuItem("About");
         help.add(new JSeparator());
         help.add(about);
+
+        about.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VpDT_16FM.aboutFrame.setVisible(true);
+            }
+        });
     }
 
     /**
