@@ -12,16 +12,17 @@ public class CUtils {
 
     /**
      * The global chars which can be used inside a text.
-     * todo Will be replace by a config file
+     * todo Will be replaced by a config file
      *
      */
     public static char[] charSet= {'~','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0','_','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','!','\'','§','$','%','&','/','(',')','=','?',',',';','.','ö','Ö','ü','Ü','ä','Ä','*','-',':',' ','>','<'};
 
     /**
      * Gets added to the dividend's last line until its the same size as the password.
+     * Since 0.0.2 its always a random symbol.
      * todo Will be replaced by something better and a config file
      */
-    public static char enhancementsSymbol = 'x';
+    public static char enhancementsSymbol = charSet[new Random().nextInt(charSet.length-2) + 1];
 
     /**
      * Removes every character not contained in the global char set.
@@ -35,7 +36,7 @@ public class CUtils {
     }
 
     /**
-     * Splits a String into an array containing Strings by a given value.
+     * Splits a {@code String} into an array containing {@code String} by a given value.
      * @param text
      *          The raw text
      * @param number
@@ -83,7 +84,7 @@ public class CUtils {
     }
 
     /**
-     * Replaces the last expression in a string by another.
+     * Replaces the last expression in a {@code String} by another.
      *
      * @param text
      *          The raw text

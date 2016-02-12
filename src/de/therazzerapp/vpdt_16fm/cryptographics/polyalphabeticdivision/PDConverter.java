@@ -2,6 +2,8 @@ package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
 
 import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 
+import java.util.Random;
+
 /**
  * Main poly division class.
  *
@@ -36,6 +38,13 @@ public class PDConverter {
         r1 = new PDRollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
         r2 = new PDRollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
         r3 = new PDRollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
+
+        Random expanderAmount = new Random(10);
+        int expander = expanderAmount.nextInt();
+
+        for (int i = 0;i < expander; i++){
+            dividend += CUtils.enhancementsSymbol;
+        }
 
         String password = CUtils.clearPlaintext(divisor);
 
