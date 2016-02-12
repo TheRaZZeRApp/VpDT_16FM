@@ -17,7 +17,7 @@ public class CopyToClipboard {
      * @param text
      *          Text to be copy
      */
-    public void copyTextToClipboard(String text){
+    public static void copyTextToClipboard(String text){
         StringSelection stringSelection = new StringSelection (text);
         Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard ();
         clpbrd.setContents (stringSelection, null);
@@ -26,7 +26,7 @@ public class CopyToClipboard {
     /**
      * Clears clipboard
      */
-    public void clearClipboard(){
+    public static void clearClipboard(){
         StringSelection stringSelection = new StringSelection ("");
         Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard ();
         clpbrd.setContents (stringSelection, null);

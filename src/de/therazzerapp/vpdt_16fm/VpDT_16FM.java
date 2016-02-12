@@ -26,7 +26,7 @@ public class VpDT_16FM {
         System.out.println("Password: " + password);
         System.out.println("Symbol: " + CUtils.enhancementsSymbol);
 
-        //VpDT_Gui.createFrame();
+        VpDT_Gui.createFrame();
 
     }
 
