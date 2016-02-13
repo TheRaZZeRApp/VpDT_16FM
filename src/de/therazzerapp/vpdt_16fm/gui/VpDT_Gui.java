@@ -152,6 +152,8 @@ public class VpDT_Gui {
                 runButton.setEnabled(true);
                 encode = true;
                 modeLabel.setText("Mode: Encode");
+                enhancementsSymbolField.setEnabled(true);
+                enhancementsSymbolBox.setEnabled(true);
             }
         });
 
@@ -166,6 +168,8 @@ public class VpDT_Gui {
                 runButton.setEnabled(true);
                 encode = false;
                 modeLabel.setText("Mode: Decode");
+                enhancementsSymbolField.setEnabled(false);
+                enhancementsSymbolBox.setEnabled(false);
             }
         });
 
