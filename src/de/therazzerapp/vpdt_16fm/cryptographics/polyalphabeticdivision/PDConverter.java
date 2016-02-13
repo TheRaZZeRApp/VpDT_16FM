@@ -25,6 +25,8 @@ public class PDConverter {
     /**
      * Encrypts the specified text with a password
      *
+     * @param pdSettings
+     *          The starting position and the multiplers
      * @param divisor
      *          The password
      * @param dividend
@@ -34,9 +36,7 @@ public class PDConverter {
      */
     public static String compile(PDSettings pdSettings, String dividend, String divisor) {
 
-        r1 = new PDRollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
-        r2 = new PDRollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
-        r3 = new PDRollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
+        updateRoller(pdSettings);
 
         Random expanderAmount = new Random(10);
         int expander = expanderAmount.nextInt();
@@ -55,7 +55,6 @@ public class PDConverter {
         splittetDividend = CUtils.splitByNumber(divisor,1);
 
         StringBuilder ciphertext = new StringBuilder();
-
         for(int x = 0; x != prepareDividend(pdSettings, dividend, password).length; x++){
             ciphertext.append(convertText(prepareDividend(pdSettings, dividend, password)[x],false));
         }
@@ -65,6 +64,8 @@ public class PDConverter {
     /**
      * Decrypts the specified text with a password
      *
+     * @param pdSettings
+     *          The starting position and the multiplers
      * @param divisor
      *          The password
      * @param dividend
@@ -74,9 +75,7 @@ public class PDConverter {
      */
     public static String decompile(PDSettings pdSettings, String dividend, String divisor) {
 
-        r1 = new PDRollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
-        r2 = new PDRollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
-        r3 = new PDRollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
+        updateRoller(pdSettings);
 
         String password = CUtils.clearPlaintext(divisor);
 
@@ -88,6 +87,18 @@ public class PDConverter {
             splittetDividend = CUtils.splitByNumber(prepareDividend(pdSettings, dividend, password)[x],1);
         }
         return plaintext.toString();
+    }
+
+    /**
+     * Updates every Roller
+     *
+     * @param pdSettings
+     *          The starting position and the multiplers
+     */
+    private static void updateRoller(PDSettings pdSettings){
+        r1 = new PDRollerNormal(pdSettings.getR1Position(), pdSettings.getR1Multiplicand());
+        r2 = new PDRollerNormal(pdSettings.getR2Position(), pdSettings.getR2Multiplicand());
+        r3 = new PDRollerFinal(pdSettings.getR3Position(), pdSettings.getR3Multiplicand());
     }
 
     /**

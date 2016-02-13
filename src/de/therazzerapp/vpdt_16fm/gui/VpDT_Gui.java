@@ -4,9 +4,12 @@ import de.therazzerapp.vpdt_16fm.CopyToClipboard;
 import de.therazzerapp.vpdt_16fm.FileReader;
 import de.therazzerapp.vpdt_16fm.VpDT_16FM;
 import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
+import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PDConverter;
+import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PDSettings;
 import de.therazzerapp.vpdt_16fm.filefilter.TXTFileFilter;
 
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -48,10 +51,15 @@ public class VpDT_Gui {
     private JTextField polyDivPassword;
     private JButton pdPasswordRandomButton;
     private JSpinner pdPasswordRandomSpinner;
+    private JCheckBox enhancementsSymbolBox;
+    private JTextField enhancementsSymbolField;
+    private JLabel enchancementSymbolErrorLabel;
+    private JLabel modeLabel;
     private JPopupMenu popup = new JPopupMenu("Popup");
     private JMenuItem ctcb = new JMenuItem("Copy To Clipboard");
     private JMenuItem clear = new JMenuItem("Clear");
     private JFileChooser openDialog = new JFileChooser();
+    private boolean encode;
 
     public JTextArea getConsoleOutputArea() {
         return consoleOutputArea;
@@ -62,11 +70,11 @@ public class VpDT_Gui {
      * @param frame
      */
     public VpDT_Gui(JFrame frame) {
-
         inputArea.setLineWrap(true);
         inputArea.setWrapStyleWord(true);
 
-        addMenu(frame);
+        DefaultCaret caret = (DefaultCaret)consoleOutputArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
         ctcb.addActionListener(e -> CopyToClipboard.copyTextToClipboard(inputArea.getText()));
         popup.add(ctcb);
@@ -105,6 +113,107 @@ public class VpDT_Gui {
             }
         });
 
+        polyalphabeticDivisionCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (polyalphabeticDivisionCheckBox.isSelected()){
+                    polydivSettings.setVisible(true);
+                } else {
+                    polydivSettings.setVisible(false);
+                }
+            }
+        });
+
+        transpositionCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (transpositionCheckBox.isSelected()){
+                    transposSettings.setVisible(true);
+                } else {
+                    transposSettings.setVisible(false);
+                }
+            }
+        });
+
+        addMenu(frame);
+        addPDUI(frame);
+
+        polydivSettings.setVisible(false);
+        transposSettings.setVisible(false);
+
+        encodeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                polyalphabeticDivisionCheckBox.setEnabled(true);
+                transpositionCheckBox.setEnabled(true);
+                pdPasswordRandomButton.setEnabled(true);
+                pdPasswordRandomSpinner.setEnabled(true);
+                pdRollerRandom.setEnabled(true);
+                runButton.setEnabled(true);
+                encode = true;
+                modeLabel.setText("Mode: Encode");
+            }
+        });
+
+        decodeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                polyalphabeticDivisionCheckBox.setEnabled(true);
+                transpositionCheckBox.setEnabled(true);
+                pdPasswordRandomButton.setEnabled(false);
+                pdPasswordRandomSpinner.setEnabled(false);
+                pdRollerRandom.setEnabled(false);
+                runButton.setEnabled(true);
+                encode = false;
+                modeLabel.setText("Mode: Decode");
+            }
+        });
+
+        runButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!polyalphabeticDivisionCheckBox.isSelected() && !transpositionCheckBox.isSelected()){
+                    consoleOutputArea.append("\n[Error] There is no method selected.");
+                    return;
+                }
+
+                if (polyalphabeticDivisionCheckBox.isSelected() && polyDivPassword.getText().isEmpty()){
+                    consoleOutputArea.append("\n[Error] There is password set.");
+                    return;
+                }
+
+                if (inputArea.getText().isEmpty()){
+                    consoleOutputArea.append("\n[Error] There is nothing to encrypt yet.");
+                    return;
+                }
+
+                if(polyalphabeticDivisionCheckBox.isSelected() && !transpositionCheckBox.isSelected()){
+                    Character eS = null;
+                    if(!enhancementsSymbolField.getText().isEmpty()){
+                        eS = enhancementsSymbolField.getText().charAt(0);
+                    }
+                    PDSettings pdSettings = new PDSettings((int)pdR1P.getValue(),(int)pdR2P.getValue(),(int)pdR3P.getValue(),(int)pdR1M.getValue(),(int)pdR2M.getValue(),(int)pdR3M.getValue(),eS);
+                    if(encode){
+                        inputArea.setText(PDConverter.compile(pdSettings,inputArea.getText(),polyDivPassword.getText()));
+                    } else {
+                        inputArea.setText(PDConverter.decompile(pdSettings,inputArea.getText(),polyDivPassword.getText()));
+                    }
+                }
+
+
+
+
+            }
+        });
+
+
+    }
+
+    /**
+     * Adds all polyDiv Objects
+     * @param frame
+     */
+    private void addPDUI(JFrame frame){
         SpinnerModel pdPasswordSpinnerModel = new SpinnerNumberModel(10,1,100,1);
         pdPasswordRandomSpinner.setModel(pdPasswordSpinnerModel);
 
@@ -142,10 +251,20 @@ public class VpDT_Gui {
             }
         });
 
+        enhancementsSymbolBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (enhancementsSymbolBox.isSelected()){
+                    enhancementsSymbolField.setEnabled(true);
+                } else {
+                    enhancementsSymbolField.setEnabled(false);
+                }
+            }
+        });
     }
 
     /**
-     *
+     * Adds all menu Objects
      * @param frame
      */
     private void addMenu(JFrame frame){
@@ -200,12 +319,7 @@ public class VpDT_Gui {
         help.add(new JSeparator());
         help.add(about);
 
-        about.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VpDT_16FM.aboutFrame.setVisible(true);
-            }
-        });
+        about.addActionListener(e -> VpDT_16FM.aboutFrame.setVisible(true));
     }
 
     /**

@@ -35,7 +35,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <grid id="eabed" binding="polydivSettings" layout-manager="GridLayoutManager" row-count="12" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                  <grid id="eabed" binding="polydivSettings" layout-manager="GridLayoutManager" row-count="16" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -147,7 +147,7 @@
                       </component>
                       <component id="b7d6d" class="javax.swing.JTextField" binding="polyDivPassword">
                         <constraints>
-                          <grid row="7" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
+                          <grid row="11" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
                           </grid>
                         </constraints>
@@ -155,7 +155,7 @@
                       </component>
                       <component id="a6cd7" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="Password:"/>
@@ -163,7 +163,7 @@
                       </component>
                       <vspacer id="5dc4d">
                         <constraints>
-                          <grid row="11" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                          <grid row="15" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
                             <minimum-size width="-1" height="3"/>
                             <preferred-size width="-1" height="3"/>
                             <maximum-size width="-1" height="3"/>
@@ -172,13 +172,13 @@
                       </vspacer>
                       <component id="c43f4" class="javax.swing.JSpinner" binding="pdPasswordRandomSpinner">
                         <constraints>
-                          <grid row="9" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="13" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties/>
                       </component>
                       <component id="d5cf2" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="Size:"/>
@@ -186,7 +186,7 @@
                       </component>
                       <component id="eb3c2" class="javax.swing.JButton" binding="pdPasswordRandomButton">
                         <constraints>
-                          <grid row="10" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="14" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="Generate"/>
@@ -194,27 +194,74 @@
                       </component>
                       <component id="ee404" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="8" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="12" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="Generate random password:"/>
+                        </properties>
+                      </component>
+                      <component id="2b6a9" class="javax.swing.JCheckBox" binding="enhancementsSymbolBox">
+                        <constraints>
+                          <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Custom"/>
+                        </properties>
+                      </component>
+                      <component id="daac" class="javax.swing.JTextField" binding="enhancementsSymbolField">
+                        <constraints>
+                          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="20" height="-1"/>
+                            <preferred-size width="25" height="-1"/>
+                            <maximum-size width="40" height="-1"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <enabled value="false"/>
+                        </properties>
+                      </component>
+                      <component id="5815f" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="6" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Enhancements Symbol:"/>
+                        </properties>
+                      </component>
+                      <vspacer id="a2a0f">
+                        <constraints>
+                          <grid row="9" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                            <minimum-size width="-1" height="10"/>
+                            <preferred-size width="-1" height="15"/>
+                            <maximum-size width="-1" height="20"/>
+                          </grid>
+                        </constraints>
+                      </vspacer>
+                      <component id="85666" class="javax.swing.JLabel" binding="enchancementSymbolErrorLabel">
+                        <constraints>
+                          <grid row="8" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value=""/>
                         </properties>
                       </component>
                     </children>
                   </grid>
                   <component id="83f87" class="javax.swing.JCheckBox" binding="polyalphabeticDivisionCheckBox" default-binding="true">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <enabled value="false"/>
                       <text value="Polyalphabetic Division"/>
                     </properties>
                   </component>
                   <component id="7edb3" class="javax.swing.JCheckBox" binding="transpositionCheckBox" default-binding="true">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <enabled value="false"/>
                       <text value="Transposition"/>
                     </properties>
                   </component>
@@ -414,7 +461,7 @@
           </grid>
         </constraints>
       </hspacer>
-      <grid id="9abd0" binding="textSettingsPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="9abd0" binding="textSettingsPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false">
@@ -427,23 +474,32 @@
         <children>
           <component id="afa64" class="javax.swing.JButton" binding="runButton" default-binding="true">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
                 <maximum-size width="60" height="35"/>
               </grid>
             </constraints>
             <properties>
+              <enabled value="false"/>
               <text value="Run"/>
             </properties>
           </component>
           <hspacer id="5316c">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="3" height="-1"/>
                 <preferred-size width="3" height="-1"/>
                 <maximum-size width="3" height="-1"/>
               </grid>
             </constraints>
           </hspacer>
+          <component id="a318a" class="javax.swing.JLabel" binding="modeLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Mode: "/>
+            </properties>
+          </component>
         </children>
       </grid>
       <toolbar id="24daf">
