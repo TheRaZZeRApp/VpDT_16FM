@@ -3,6 +3,7 @@ package de.therazzerapp.vpdt_16fm.gui;
 import de.therazzerapp.vpdt_16fm.CopyToClipboard;
 import de.therazzerapp.vpdt_16fm.FileReader;
 import de.therazzerapp.vpdt_16fm.VpDT_16FM;
+import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 import de.therazzerapp.vpdt_16fm.filefilter.TXTFileFilter;
 
 import javax.swing.*;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Random;
 
 /**
  * <description>
@@ -30,6 +32,22 @@ public class VpDT_Gui {
     private JButton encodeButton;
     private JButton decodeButton;
     private JScrollPane inputScrollPane;
+    private JPanel chiperSettings;
+    private JCheckBox polyalphabeticDivisionCheckBox;
+    private JPanel polydivSettings;
+    private JCheckBox transpositionCheckBox;
+    private JPanel transposSettings;
+    private JSpinner pdR1P;
+    private JSpinner pdR1M;
+    private JSpinner pdR2P;
+    private JSpinner pdR2M;
+    private JSpinner pdR3M;
+    private JSpinner pdR3P;
+    private JButton pdRollerRandom;
+    private JButton pdRollerReset;
+    private JTextField polyDivPassword;
+    private JButton pdPasswordRandomButton;
+    private JSpinner pdPasswordRandomSpinner;
     private JPopupMenu popup = new JPopupMenu("Popup");
     private JMenuItem ctcb = new JMenuItem("Copy To Clipboard");
     private JMenuItem clear = new JMenuItem("Clear");
@@ -87,6 +105,43 @@ public class VpDT_Gui {
             }
         });
 
+        SpinnerModel pdPasswordSpinnerModel = new SpinnerNumberModel(10,1,100,1);
+        pdPasswordRandomSpinner.setModel(pdPasswordSpinnerModel);
+
+        pdR1P.setModel(new SpinnerNumberModel(3,1,null,1));
+        pdR2P.setModel(new SpinnerNumberModel(3,1,null,1));
+        pdR3P.setModel(new SpinnerNumberModel(3,1,null,1));
+        pdR1M.setModel(new SpinnerNumberModel(3,1,null,1));
+        pdR2M.setModel(new SpinnerNumberModel(3,1,null,1));
+        pdR3M.setModel(new SpinnerNumberModel(3,1,null,1));
+
+        pdPasswordRandomButton.addActionListener(e -> polyDivPassword.setText(CUtils.generatePassword((int)pdPasswordRandomSpinner.getValue())));
+
+        pdRollerReset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pdR1P.setValue(3);
+                pdR2P.setValue(3);
+                pdR3P.setValue(3);
+                pdR1M.setValue(3);
+                pdR2M.setValue(3);
+                pdR3M.setValue(3);
+            }
+        });
+
+        pdRollerRandom.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Random random = new Random();
+                pdR1P.setValue(random.nextInt(CUtils.charSet.length)+2);
+                pdR2P.setValue(random.nextInt(CUtils.charSet.length)+2);
+                pdR3P.setValue(random.nextInt(CUtils.charSet.length)+2);
+                pdR1M.setValue(random.nextInt(CUtils.charSet.length)+2);
+                pdR2M.setValue(random.nextInt(CUtils.charSet.length)+2);
+                pdR3M.setValue(random.nextInt(CUtils.charSet.length)+2);
+            }
+        });
+
     }
 
     /**
@@ -133,6 +188,13 @@ public class VpDT_Gui {
         JMenuItem settings = new JMenuItem("Settings");
         options.add(new JSeparator());
         options.add(settings);
+
+        settings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VpDT_16FM.settingsFrame.setVisible(true);
+            }
+        });
 
         JMenuItem about = new JMenuItem("About");
         help.add(new JSeparator());

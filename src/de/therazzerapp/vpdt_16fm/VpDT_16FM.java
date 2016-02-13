@@ -4,6 +4,7 @@ import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PDSetting
 import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PDConverter;
 import de.therazzerapp.vpdt_16fm.gui.AboutGui;
+import de.therazzerapp.vpdt_16fm.gui.SettingsGui;
 import de.therazzerapp.vpdt_16fm.gui.VpDT_Gui;
 
 import javax.swing.*;
@@ -20,6 +21,8 @@ public class VpDT_16FM {
     public static String buildNumber = "b0.0.2";
     public static JFrame frame = new JFrame("VpDT_Gui");
     public static JFrame aboutFrame = new JFrame("About");
+    public static JFrame settingsFrame = new JFrame("Settings");
+    public static SettingsGui settingsGui = new SettingsGui(settingsFrame);
     public static AboutGui aboutGui = new AboutGui(aboutFrame);
     public static VpDT_Gui vpDT_gui = new VpDT_Gui(frame);
 
@@ -56,6 +59,16 @@ public class VpDT_16FM {
         aboutFrame.setLocationRelativeTo(null);
         aboutFrame.setMinimumSize(new Dimension(400, 300));
         aboutFrame.setResizable(false);
+
+        settingsFrame.setContentPane(settingsGui.getSettingsPanel());
+        settingsFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        settingsFrame.pack();
+        settingsFrame.setVisible(false);
+        settingsFrame.setSize(600,300);
+        settingsFrame.setTitle("Settings");
+        settingsFrame.setLocationRelativeTo(null);
+        settingsFrame.setMinimumSize(new Dimension(600, 300));
+        settingsFrame.setResizable(false);
 
         vpDT_gui.getConsoleOutputArea().append("[Info] VpDT_16FM " +buildNumber+" started successfully.");
 
