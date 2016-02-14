@@ -1,4 +1,4 @@
-package de.therazzerapp.vpdt_16fm;
+package de.therazzerapp.vpdt_16fm.gui;
 
 import java.io.*;
 

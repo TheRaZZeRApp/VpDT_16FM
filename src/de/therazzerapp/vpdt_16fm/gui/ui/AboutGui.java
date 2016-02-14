@@ -1,4 +1,4 @@
-package de.therazzerapp.vpdt_16fm.gui;
+package de.therazzerapp.vpdt_16fm.gui.ui;
 
 import de.therazzerapp.vpdt_16fm.VpDT_16FM;
 

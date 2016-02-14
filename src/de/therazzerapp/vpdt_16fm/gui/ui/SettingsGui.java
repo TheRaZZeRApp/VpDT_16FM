@@ -1,4 +1,4 @@
-package de.therazzerapp.vpdt_16fm.gui;
+package de.therazzerapp.vpdt_16fm.gui.ui;
 
 import javax.swing.*;
 
@@ -6,7 +6,7 @@ import javax.swing.*;
  * <description>
  *
  * @author The RaZZeR App <rezzer101@googlemail.com; e-mail@therazzerapp.de>
- * @since <version>
+ * @since 0.0.2
  */
 public class SettingsGui {
     private JPanel settingsPanel;

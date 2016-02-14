@@ -1,11 +1,9 @@
 package de.therazzerapp.vpdt_16fm;
 
-import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PDSettings;
-import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
-import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PDConverter;
-import de.therazzerapp.vpdt_16fm.gui.AboutGui;
-import de.therazzerapp.vpdt_16fm.gui.SettingsGui;
-import de.therazzerapp.vpdt_16fm.gui.VpDT_Gui;
+import de.therazzerapp.vpdt_16fm.gui.ui.AboutGui;
+import de.therazzerapp.vpdt_16fm.gui.ConsoleCommander;
+import de.therazzerapp.vpdt_16fm.gui.ui.SettingsGui;
+import de.therazzerapp.vpdt_16fm.gui.ui.VpDT_Gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,19 +26,6 @@ public class VpDT_16FM {
 
     public static void main(String[] args) {
 
-
-
-        PDSettings pdSettings = new PDSettings(2,3,4,5,6,7);
-        String sentence = "Das ist ein kleiner Test";
-        String password = CUtils.generatePassword(1);
-
-        String code = PDConverter.compile(pdSettings,sentence,password);
-        System.out.println("Plaintext: " + sentence);
-        System.out.println("Ciphertext: " + code);
-        System.out.println("Decipherd text: " + PDConverter.decompile(pdSettings,code,password));
-        System.out.println("Password: " + password);
-        System.out.println("Symbol: " + CUtils.enhancementsSymbol);
-
         frame.setContentPane(vpDT_gui.getjPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -49,6 +34,7 @@ public class VpDT_16FM {
         frame.setTitle("VpDT_16FM " + buildNumber);
         frame.setLocationRelativeTo(null);
         frame.setMinimumSize(new Dimension(900,550));
+        frame.setResizable(false);
 
         aboutFrame.setContentPane(aboutGui.getAboutPanel());
         aboutFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -70,9 +56,7 @@ public class VpDT_16FM {
         settingsFrame.setMinimumSize(new Dimension(600, 300));
         settingsFrame.setResizable(false);
 
-        vpDT_gui.getConsoleOutputArea().append("[Info] VpDT_16FM " +buildNumber+" started successfully.");
-
-
+        ConsoleCommander.sendInfo(vpDT_gui.getConsoleOutputArea(),"VpDT_16FM " +buildNumber+" started successfully.");
     }
 
 }

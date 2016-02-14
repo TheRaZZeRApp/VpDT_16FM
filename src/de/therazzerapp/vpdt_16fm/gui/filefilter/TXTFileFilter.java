@@ -1,4 +1,4 @@
-package de.therazzerapp.vpdt_16fm.filefilter;
+package de.therazzerapp.vpdt_16fm.gui.filefilter;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.File;

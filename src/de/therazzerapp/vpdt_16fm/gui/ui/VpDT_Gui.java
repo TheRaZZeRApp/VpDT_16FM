@@ -1,12 +1,13 @@
-package de.therazzerapp.vpdt_16fm.gui;
+package de.therazzerapp.vpdt_16fm.gui.ui;
 
-import de.therazzerapp.vpdt_16fm.CopyToClipboard;
-import de.therazzerapp.vpdt_16fm.FileReader;
+import de.therazzerapp.vpdt_16fm.gui.CopyToClipboard;
 import de.therazzerapp.vpdt_16fm.VpDT_16FM;
 import de.therazzerapp.vpdt_16fm.cryptographics.CUtils;
 import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PDConverter;
 import de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision.PDSettings;
-import de.therazzerapp.vpdt_16fm.filefilter.TXTFileFilter;
+import de.therazzerapp.vpdt_16fm.gui.filefilter.TXTFileFilter;
+import de.therazzerapp.vpdt_16fm.gui.ConsoleCommander;
+import de.therazzerapp.vpdt_16fm.gui.FileReader;
 
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
@@ -29,7 +30,7 @@ public class VpDT_Gui {
     private JPanel inputPanel;
     private JPanel consoleOutputPanel;
     private JTextArea inputArea;
-    private JTextArea consoleOutputArea;
+    private JTextPane consoleOutputArea;
     private JPanel textSettingsPanel;
     private JButton runButton;
     private JButton encodeButton;
@@ -61,7 +62,7 @@ public class VpDT_Gui {
     private JFileChooser openDialog = new JFileChooser();
     private boolean encode;
 
-    public JTextArea getConsoleOutputArea() {
+    public JTextPane getConsoleOutputArea() {
         return consoleOutputArea;
     }
 
@@ -72,6 +73,8 @@ public class VpDT_Gui {
     public VpDT_Gui(JFrame frame) {
         inputArea.setLineWrap(true);
         inputArea.setWrapStyleWord(true);
+
+        consoleOutputArea.setContentType("text/html");
 
         DefaultCaret caret = (DefaultCaret)consoleOutputArea.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -177,21 +180,22 @@ public class VpDT_Gui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!polyalphabeticDivisionCheckBox.isSelected() && !transpositionCheckBox.isSelected()){
-                    consoleOutputArea.append("\n[Error] There is no method selected.");
+                    ConsoleCommander.sendError(consoleOutputArea,"There is no method selected.");
                     return;
                 }
 
                 if (polyalphabeticDivisionCheckBox.isSelected() && polyDivPassword.getText().isEmpty()){
-                    consoleOutputArea.append("\n[Error] There is password set.");
+                    ConsoleCommander.sendError(consoleOutputArea,"There is password set.");
                     return;
                 }
 
                 if (inputArea.getText().isEmpty()){
-                    consoleOutputArea.append("\n[Error] There is nothing to encrypt yet.");
+                    ConsoleCommander.sendError(consoleOutputArea,"There is nothing to encrypt yet.");
                     return;
                 }
 
                 if(polyalphabeticDivisionCheckBox.isSelected() && !transpositionCheckBox.isSelected()){
+                    int textLength = inputArea.getText().length();
                     Character eS = null;
                     if(!enhancementsSymbolField.getText().isEmpty()){
                         eS = enhancementsSymbolField.getText().charAt(0);
@@ -199,9 +203,12 @@ public class VpDT_Gui {
                     PDSettings pdSettings = new PDSettings((int)pdR1P.getValue(),(int)pdR2P.getValue(),(int)pdR3P.getValue(),(int)pdR1M.getValue(),(int)pdR2M.getValue(),(int)pdR3M.getValue(),eS);
                     if(encode){
                         inputArea.setText(PDConverter.compile(pdSettings,inputArea.getText(),polyDivPassword.getText()));
+                        ConsoleCommander.sendInfo(consoleOutputArea,"Text successfully encrypted (Chars: " + textLength + " before / " + inputArea.getText().length() + " after).");
                     } else {
                         inputArea.setText(PDConverter.decompile(pdSettings,inputArea.getText(),polyDivPassword.getText()));
+                        ConsoleCommander.sendInfo(consoleOutputArea,"Text successfully decrypted (Chars: " + textLength + " before / " + inputArea.getText().length() + " after).");
                     }
+
                 }
 
 
@@ -303,14 +310,29 @@ public class VpDT_Gui {
         open.addActionListener(e -> {
             openDialog.showOpenDialog(frame);
             inputArea.setText(FileReader.getFileContent(openDialog.getSelectedFile()));
-            consoleOutputArea.append("\n[Info] The following file was read: " + "\"" + openDialog.getSelectedFile().getAbsolutePath() +"\" (" + inputArea.getText().length() + " character)");
+            ConsoleCommander.sendInfo(consoleOutputArea,"\nFile loaded: <u color=ORANGE>" + "\"" + openDialog.getSelectedFile().getAbsolutePath() +"</u>\" (" + inputArea.getText().length() + " chars).");
         });
 
         exit.addActionListener(e -> System.exit(0));
 
+        JCheckBoxMenuItem resiszable = new JCheckBoxMenuItem("Resizable");
         JMenuItem settings = new JMenuItem("Settings");
+        options.add(resiszable);
         options.add(new JSeparator());
         options.add(settings);
+
+        resiszable.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(resiszable.isSelected()){
+                    frame.setResizable(true);
+                } else {
+                    frame.setResizable(false);
+                }
+            }
+        });
+
+
 
         settings.addActionListener(new ActionListener() {
             @Override
@@ -333,4 +355,5 @@ public class VpDT_Gui {
     public JPanel getjPanel() {
         return jPanel;
     }
+
 }
