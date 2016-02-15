@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="jPanel" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="874" height="632"/>
+      <xy x="20" y="20" width="874" height="654"/>
     </constraints>
     <properties>
       <enabled value="true"/>
@@ -352,7 +352,7 @@
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="650" height="-1"/>
+            <preferred-size width="650" height="350"/>
           </grid>
         </constraints>
         <properties/>
@@ -360,7 +360,7 @@
         <children>
           <scrollpane id="5837f" binding="inputScrollPane">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <horizontalScrollBarPolicy value="30"/>
@@ -381,9 +381,10 @@
       <grid id="702c3" binding="consoleOutputPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="2" fill="1" indent="0" use-parent-layout="false">
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="7" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false">
             <minimum-size width="-1" height="100"/>
-            <maximum-size width="-1" height="250"/>
+            <preferred-size width="-1" height="180"/>
+            <maximum-size width="-1" height="180"/>
           </grid>
         </constraints>
         <properties/>
@@ -397,9 +398,9 @@
               <text value="Console Output:"/>
             </properties>
           </component>
-          <scrollpane id="df235">
+          <scrollpane id="df235" binding="consoleScrollpane">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <horizontalScrollBarPolicy value="30"/>

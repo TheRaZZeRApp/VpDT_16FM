@@ -6,7 +6,7 @@ import java.util.Random;
  * Class includes various useful methods and global objects.
  *
  * @author The RaZZeR App <rezzer101@googlemail.com; e-mail@therazzerapp.de>
- * @since 0.0.1
+ * @since 0.0.2
  */
 public class CUtils {
 

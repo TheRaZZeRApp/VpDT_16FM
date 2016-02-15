@@ -56,6 +56,7 @@ public class VpDT_Gui {
     private JTextField enhancementsSymbolField;
     private JLabel enchancementSymbolErrorLabel;
     private JLabel modeLabel;
+    private JScrollPane consoleScrollpane;
     private JPopupMenu popup = new JPopupMenu("Popup");
     private JMenuItem ctcb = new JMenuItem("Copy To Clipboard");
     private JMenuItem clear = new JMenuItem("Clear");
@@ -75,6 +76,8 @@ public class VpDT_Gui {
         inputArea.setWrapStyleWord(true);
 
         consoleOutputArea.setContentType("text/html");
+
+        consoleScrollpane.getViewport().setAutoscrolls(true);
 
         DefaultCaret caret = (DefaultCaret)consoleOutputArea.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
