@@ -55,8 +55,10 @@ public class PDConverter {
         splittetDividend = CUtils.splitByNumber(divisor,1);
 
         StringBuilder ciphertext = new StringBuilder();
-        for(int x = 0; x != prepareDividend(pdSettings, dividend, password).length; x++){
-            ciphertext.append(convertText(prepareDividend(pdSettings, dividend, password)[x],false));
+
+        String[] preparedDividend = prepareDividend(pdSettings, dividend, password);
+        for(int x = 0; x != preparedDividend.length; x++){
+            ciphertext.append(convertText(preparedDividend[x],false));
         }
         return ciphertext.toString();
     }
@@ -82,9 +84,10 @@ public class PDConverter {
         splittetDividend = CUtils.splitByNumber(divisor,1);
 
         StringBuilder plaintext = new StringBuilder();
-        for(int x = 0; x != prepareDividend(pdSettings, dividend, password).length; x++){
-            plaintext.append(convertText(prepareDividend(pdSettings, dividend, password)[x],true));
-            splittetDividend = CUtils.splitByNumber(prepareDividend(pdSettings, dividend, password)[x],1);
+        String[] preparedDividend = prepareDividend(pdSettings, dividend, password);
+        for(int x = 0; x != preparedDividend.length; x++){
+            plaintext.append(convertText(preparedDividend[x],true));
+            splittetDividend = CUtils.splitByNumber(preparedDividend[x],1);
         }
         return plaintext.toString();
     }

@@ -7,6 +7,7 @@ package de.therazzerapp.vpdt_16fm.cryptographics.polyalphabeticdivision;
  * @since 0.0.1
  */
 public class PDRollerFinal extends PDRoller {
+
     public PDRollerFinal(int moves, int multiplicand) {
         super(moves, multiplicand);
     }
@@ -20,7 +21,7 @@ public class PDRollerFinal extends PDRoller {
         }
 
         moves += keyPosition*multiplicand*multiplicand;
-        position = correctMoves(position -= keyPosition*multiplicand*multiplicand);
+        position = correctMoves(position - keyPosition*multiplicand*multiplicand);
     }
 
     /**
@@ -45,6 +46,6 @@ public class PDRollerFinal extends PDRoller {
         }
 
         moves += keyPosition;
-        position = correctMoves(position -= keyPosition);
+        position = correctMoves(position - keyPosition);
     }
 }
