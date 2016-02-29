@@ -17,12 +17,13 @@ public class CUtils {
      */
     public static char[] charSet= {'~','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0','_','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','!','\'','§','$','%','&','/','(',')','=','?',',',';','.','ö','Ö','ü','Ü','ä','Ä','*','-',':',' ','>','<'};
 
+    private static Random random = new Random();
     /**
      * Gets added to the dividend's last line until its the same size as the password.
      * Since 0.0.2 its always a random symbol.
      * todo Will be replaced by something better and a config file
      */
-    public static char enhancementsSymbol = charSet[new Random().nextInt(charSet.length-2) + 1];
+    public static char enhancementsSymbol = charSet[random.nextInt(charSet.length-2) + 1];
 
     /**
      * Removes every character not contained in the global char set.
@@ -48,9 +49,13 @@ public class CUtils {
         int inLength = text.length();
         int arLength = inLength / number;
         int left=inLength%number;
-        if(left>0){++arLength;}
-        String ar[] = new String[arLength];
         String tempText=text;
+
+        if(left>0){
+            ++arLength;
+        }
+        String ar[] = new String[arLength];
+
         for (int x = 0; x < arLength; ++x) {
             if(tempText.length()>number){
                 ar[x]=tempText.substring(0, number);
@@ -71,7 +76,6 @@ public class CUtils {
      *      A random generated password
      */
     public static String generatePassword(int length){
-        Random random = new Random();
         StringBuilder password = new StringBuilder();
         for(int x=0;x != length;x++){
             char temp = charSet[random.nextInt(charSet.length-1)];
