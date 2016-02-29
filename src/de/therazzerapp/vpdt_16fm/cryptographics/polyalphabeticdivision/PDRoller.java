@@ -64,13 +64,6 @@ public abstract class PDRoller {
     public abstract void move(int keyPosition);
 
     /**
-     * Moves the roller to a give char
-     * @param key
-     *          The char
-     */
-    public abstract void moveToKey(char key);
-
-    /**
      * Returns the currently selected char.
      * @return
      *      The current char

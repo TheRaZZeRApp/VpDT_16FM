@@ -24,7 +24,11 @@ public class PDRollerNormal extends PDRoller {
         position = correctMoves(position + keyPosition*multiplicand);
     }
 
-    @Override
+    /**
+     * Moves the roller to a give char
+     * @param key
+     *          The char
+     */
     public void moveToKey(char key) {
         moves=0;
         int keyPosition = keyToPosition(key);

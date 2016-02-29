@@ -25,15 +25,6 @@ public class PDRollerFinal extends PDRoller {
     }
 
     /**
-     * This method is empty, use moveFinal instead.
-     * @param key
-     */
-    @Override
-    public void moveToKey(char key) {
-        //empty
-    }
-
-    /**
      * The final move from this roller goes backwards
      * @param keyPosition
      *          The amount of moves
