@@ -3,6 +3,9 @@
 A encryption tool.
 Verschlüsselung durch polyalphabetische Division und Transposition von 16 Felder-Matrizen
 
+## Documentation
+http://dev.therazzerapp.de/vpdt_16fm_doc/
+
 ## Download Jar
 * [b0.0.2] VpDT_16FM_b0.0.2.jar (http://therazzerapp.de/vpdt/VpDT_16FM_b0.0.2.jar)
 
