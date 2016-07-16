@@ -324,14 +324,11 @@ public class VpDT_Gui {
         options.add(new JSeparator());
         options.add(settings);
 
-        resiszable.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(resiszable.isSelected()){
-                    frame.setResizable(true);
-                } else {
-                    frame.setResizable(false);
-                }
+        resiszable.addActionListener(e -> {
+            if(resiszable.isSelected()){
+                frame.setResizable(true);
+            } else {
+                frame.setResizable(false);
             }
         });
 
