@@ -14,12 +14,9 @@ public class PDRollerNormal extends PDRoller {
 
     @Override
     public void move(int keyPosition) {
-        moves=0;
-
-        if (keyPosition == 0){
+        if (!isValid(keyPosition)) {
             return;
         }
-
         moves += keyPosition*multiplicand;
         position = correctMoves(position + keyPosition*multiplicand);
     }

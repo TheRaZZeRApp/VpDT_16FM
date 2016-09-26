@@ -14,12 +14,9 @@ public class PDRollerFinal extends PDRoller {
 
     @Override
     public void move(int keyPosition) {
-        moves=0;
-
-        if (keyPosition == 0){
+        if (!isValid(keyPosition)) {
             return;
         }
-
         moves += keyPosition*multiplicand*multiplicand;
         position = correctMoves(position - keyPosition*multiplicand*multiplicand);
     }
@@ -30,13 +27,11 @@ public class PDRollerFinal extends PDRoller {
      *          The amount of moves
      */
     public void moveFinal(int keyPosition){
-        moves=0;
-
-        if (keyPosition == 0){
+        if (!isValid(keyPosition)) {
             return;
         }
-
         moves += keyPosition;
         position = correctMoves(position - keyPosition);
     }
+
 }

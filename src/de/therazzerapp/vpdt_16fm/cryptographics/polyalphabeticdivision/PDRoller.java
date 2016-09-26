@@ -57,6 +57,16 @@ public abstract class PDRoller {
     }
 
     /**
+     * Check for valid position and resets position
+     * @param keyP
+     * @return
+     */
+    protected boolean isValid(int keyP){
+        moves=0;
+        return keyP != 0;
+    }
+
+    /**
      * Moves the roller by a give amount
      * @param keyPosition
      *          The amount of moves

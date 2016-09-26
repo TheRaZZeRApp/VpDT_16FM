@@ -82,7 +82,6 @@ public class PDConverter {
         String password = CUtils.clearPlaintext(divisor);
 
         splittetDividend = CUtils.splitByNumber(divisor,1);
-
         StringBuilder plaintext = new StringBuilder();
         String[] preparedDividend = prepareDividend(pdSettings, dividend, password);
         for(int x = 0; x != preparedDividend.length; x++){
